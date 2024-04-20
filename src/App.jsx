@@ -1,3 +1,5 @@
+import useThrottle from "./custom-hooks/useThrottle";
+
 function App() {
   const fetchData = async () => {
     const resp = await fetch("http://localhost:8000/data");
@@ -8,9 +10,12 @@ function App() {
       console.log(data);
     });
   };
+
+  const handleClickThrottled = useThrottle(handleClick, 1000);
+
   return (
     <div className="App">
-      <button onClick={handleClick}>Click Me</button>
+      <button onClick={handleClickThrottled}>Click Me</button>
     </div>
   );
 }
